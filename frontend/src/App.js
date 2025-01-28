@@ -1,15 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import AdminDashboard from "./components/AdminDashboard";
+import Home from "./components/Home";
 import AdminLogin from "./components/AdminLogin";
+import AdminDashboard from "./components/AdminDashboard";
 import StudentLogin from "./components/StudentLogin";
 import StudentView from "./components/StudentView";
 
-const App = () => {
+function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<h1>Welcome! Please select Admin or Student.</h1>} />
+        <Route path="/" element={<Home />} />
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/student/login" element={<StudentLogin />} />
@@ -17,6 +18,6 @@ const App = () => {
       </Routes>
     </Router>
   );
-};
+}
 
 export default App;

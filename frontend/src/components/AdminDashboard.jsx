@@ -1,5 +1,5 @@
-// src/components/AdminDashboard.jsx
 import React, { useState } from "react";
+import axios from "../api";
 
 const AdminDashboard = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -8,13 +8,23 @@ const AdminDashboard = () => {
     setSelectedFile(event.target.files[0]);
   };
 
-  const handleUpload = () => {
+  const handleUpload = async () => {
     if (!selectedFile) {
       alert("Please select a file before uploading.");
       return;
     }
-    // Logic to upload the file to the backend
-    alert(`File ${selectedFile.name} uploaded successfully!`);
+
+    const formData = new FormData();
+    formData.append("file", selectedFile);
+
+    try {
+      await axios.post("/admin/upload", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      alert("File uploaded successfully!");
+    } catch (error) {
+      alert("Failed to upload file.");
+    }
   };
 
   return (
